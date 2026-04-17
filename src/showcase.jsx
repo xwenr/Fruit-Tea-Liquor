@@ -12,27 +12,28 @@ const SCREENS = [
 
 const IFRAME_W = 424;
 const IFRAME_H = 880;
-const SCALE = 0.62;
+const SCALE = 0.6;
 const VISUAL_W = Math.round(IFRAME_W * SCALE);
 const VISUAL_H = Math.round(IFRAME_H * SCALE);
 
-const PHONE_LEFT = Math.round(((IFRAME_W - 390) / 2) * SCALE);
-const PHONE_TOP = Math.round(((IFRAME_H - 844) / 2) * SCALE);
+const PHONE_X = Math.round(((IFRAME_W - 390) / 2) * SCALE);
+const PHONE_Y = Math.round(((IFRAME_H - 844) / 2) * SCALE);
 const PHONE_W = Math.round(390 * SCALE);
 const PHONE_H = Math.round(844 * SCALE);
 const PHONE_R = Math.round(44 * SCALE);
 
-const PHONE_SHADOW = [
-  '0 2px 4px rgba(26,30,27,0.03)',
-  '0 8px 18px rgba(26,30,27,0.045)',
-  '0 24px 48px rgba(26,30,27,0.07)',
-  '0 48px 80px rgba(26,30,27,0.05)',
+const SHADOW = [
+  '0 2px 4px rgba(26,30,27,0.025)',
+  '0 8px 16px rgba(26,30,27,0.04)',
+  '0 24px 48px rgba(26,30,27,0.065)',
+  '0 48px 80px rgba(26,30,27,0.045)',
 ].join(', ');
 
 const INJECT_CSS = [
   'body{background:transparent!important}',
   '#root>div{background:transparent!important}',
-  '#root>div>div{box-shadow:0 0 0 1px rgba(0,0,0,0.035)!important}',
+  '#root>div>div{box-shadow:0 0 0 0.5px rgba(0,0,0,0.06)!important}',
+  '*{-webkit-font-smoothing:antialiased!important;-moz-osx-font-smoothing:grayscale!important;text-rendering:geometricPrecision!important}',
 ].join('');
 
 function PhonePreview({ screen, delay }) {
@@ -67,7 +68,7 @@ function PhonePreview({ screen, delay }) {
       className="flex flex-col items-center"
       style={{
         opacity: ready ? 1 : 0,
-        transform: ready ? 'translateY(0)' : 'translateY(28px)',
+        transform: ready ? 'translateY(0)' : 'translateY(24px)',
         transition: `all 0.8s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
       }}
     >
@@ -76,13 +77,12 @@ function PhonePreview({ screen, delay }) {
           aria-hidden="true"
           style={{
             position: 'absolute',
-            left: PHONE_LEFT,
-            top: PHONE_TOP,
+            left: PHONE_X,
+            top: PHONE_Y,
             width: PHONE_W,
             height: PHONE_H,
             borderRadius: PHONE_R,
-            boxShadow: PHONE_SHADOW,
-            pointerEvents: 'none',
+            boxShadow: SHADOW,
           }}
         />
         <div
@@ -106,6 +106,8 @@ function PhonePreview({ screen, delay }) {
               background: 'transparent',
               transformOrigin: 'top left',
               transform: `scale(${SCALE})`,
+              willChange: 'transform',
+              backfaceVisibility: 'hidden',
               pointerEvents: 'none',
             }}
           />
@@ -145,8 +147,8 @@ function Showcase() {
       className="min-h-screen flex flex-col"
       style={{
         background: `
-          radial-gradient(ellipse 80% 50% at 30% 0%, rgba(209,255,77,0.07) 0%, transparent 60%),
-          radial-gradient(ellipse 60% 40% at 70% 100%, rgba(255,241,118,0.05) 0%, transparent 50%),
+          radial-gradient(ellipse 80% 50% at 30% 0%, rgba(209,255,77,0.06) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 40% at 70% 100%, rgba(255,241,118,0.04) 0%, transparent 50%),
           #F5F7F1
         `,
       }}
@@ -191,10 +193,7 @@ function Showcase() {
           </div>
         )}
 
-        <div
-          className="flex justify-center items-start px-6 pb-12"
-          style={{ gap: Math.max(12, Math.round(VISUAL_W * 0.06)) }}
-        >
+        <div className="flex justify-center items-start gap-4 px-6 pb-12">
           {SCREENS.map((screen, i) => (
             <PhonePreview
               key={screen.index}
