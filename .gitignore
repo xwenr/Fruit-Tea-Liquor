@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.cursor/
+.agents/
+ui-ux-pro-max-skill/
+1.txt
+skills-lock.json
+*.log
