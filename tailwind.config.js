@@ -33,10 +33,18 @@ export default {
           deep: '#022C22',
           ink: '#0D3B2E',
         },
+        peach: {
+          50: '#FFF6F0',
+          100: '#FFEADB',
+          200: '#FFD2B0',
+          300: '#FFB380',
+          400: '#FF9050',
+          500: '#E87432',
+        },
         ink: {
-          DEFAULT: '#1A1C1E',
-          light: '#3A3C3E',
-          muted: '#6B6D70',
+          DEFAULT: '#1A1E1B',
+          light: '#3A403C',
+          muted: '#6B736E',
         },
         brand: {
           DEFAULT: '#b9f56b',
@@ -47,6 +55,17 @@ export default {
           200: '#D1E2D4',
           300: '#A3C4A9',
           400: '#6B9B74',
+        },
+        surface: {
+          DEFAULT: '#EAEDE6',
+          light: '#F2F4EE',
+          warm: '#F0EDE7',
+        },
+        status: {
+          success: '#2EBD6F',
+          warning: '#F0A030',
+          error: '#EF5350',
+          info: '#4DA8DA',
         },
       },
       fontSize: {
