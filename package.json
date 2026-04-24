@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:embed": "vite build --base=/drink/",
     "preview": "vite preview"
   },
   "dependencies": {
